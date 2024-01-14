@@ -5,46 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños!</title>
     <style>
-		body {
-			font-family: 'Cursive', sans-serif;
-			text-align: center;
-			background-color: #739CD5; /* Cambié el color de fondo */
-			color: #4d4d4d; /* Cambié el color del texto */
-			margin: 0;
-			padding: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-		}
+        body {
+            font-family: 'Cursive', sans-serif;
+            text-align: center;
+            background-color: #739CD5;
+            color: #4d4d4d;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-		#container {
-			max-width: 600px;
-			padding: 40px;
-			background-color: #fff;
-			border-radius: 20px; /* Aumenté el radio del borde */
-			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-		}
+        #container {
+            max-width: 600px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.5s ease;
+        }
 
-		h1 {
-			color: #739CD5;
-			font-size: 2.5em; /* Aumenté el tamaño del título */
-			margin-bottom: 20px;
-		}
+        h1 {
+            color: #739CD5;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
 
-		p {
-			font-size: 1.2em;
-			line-height: 1.6;
-			margin-bottom: 20px;
-		}
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
 
-		img {
-			max-width: 100%;
-			height: auto;
-			border-radius: 20px; /* Aumenté el radio del borde */
-			margin-top: 20px;
-			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-		}
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
 
         #confetti {
             position: fixed;
@@ -54,15 +57,15 @@
             z-index: 9999;
         }
 
-		.confetti {
-			position: absolute;
-			background-color: #739CD5; /* Cambié el color del confetti */
-			width: 10px;
-			height: 10px;
-			border-radius: 50%;
-			opacity: 0.8;
-			animation: confetti-fall linear infinite both;
-		}
+        .confetti {
+            position: absolute;
+            background-color: #739CD5;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: confetti-fall linear infinite both;
+        }
 
         @keyframes confetti-fall {
             0%, 100% {
@@ -84,20 +87,23 @@
         <h1>¡Feliz Cumpleaños!</h1>
         <p>Mi Querida Rapunzel,</p>
         <p>A pesar de los kilómetros que nos separan y el no poder estar contigo en persona en tu cumpleaños, quiero decirte que mi corazón está contigo en este día tan especial,
-			y quiero que sientas un abrazo a través de estas palabras.</p>
-		<p>¡Feliz cumpleaños, mi amor! Que este año te traiga toda la felicidad que mereces y momentos inolvidables. Dios te llene de mucha salud y te colme de bendiciones. </p>
-		<p>Te amo más de lo que las palabras pueden expresar</p>	
-        <img src="GYS.jpg" alt="Imagen de Cumpleaños">
+            y quiero que sientas un abrazo a través de estas palabras.</p>
+        <p>¡Feliz cumpleaños, mi amor! Que este año te traiga toda la felicidad que mereces y momentos inolvidables. Dios te llene de mucha salud y te colme de bendiciones. </p>
+        <p>Te amo más de lo que las palabras pueden expresar</p>    
+        <img id="birthdayImage" src="foto1.jpg" alt="Imagen de Cumpleaños">
     </div>
 
     <div id="confetti"></div>
 
     <audio id="audio" controls autoplay loop>
-        <source src="cumpleanosFeliz.mp3" type="audio/mp3">
+        <source src="mixCumpleaños.mp3" type="audio/mp3">
         Tu navegador no soporta la etiqueta de audio.
     </audio>
 
     <script>
+        const imagePaths = ["foto1.jpg","foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg", "foto6.jpg", "foto7.jpg", "foto8.jpg", "foto9.jpg", "foto10.jpg", "foto11.jpg", "foto12.jpg", "foto13.jpg", "foto14.jpg", "foto15.jpg", "foto16.jpg", "foto17.jpg", "foto18.jpg", "foto19.jpg", "foto20.jpg"];
+        let currentImageIndex = 0;
+
         function createConfetti() {
             const confettiContainer = document.getElementById('confetti');
             const numConfetti = 50;
@@ -111,15 +117,28 @@
             }
         }
 
+        function changeImage() {
+            const image = document.getElementById('birthdayImage');
+            image.style.opacity = 0;
+
+            currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+            image.src = imagePaths[currentImageIndex];
+
+            setTimeout(() => {
+                image.style.opacity = 1;
+            }, 1000);
+        }
+
         createConfetti();
 
-        // Reproducir audio al hacer clic en la página
-        document.body.addEventListener('click', function() {
+        // Cambiar la imagen al hacer clic en cualquier parte del documento
+        document.addEventListener('click', function() {
             const audio = document.getElementById('audio');
             audio.volume = 0.5;
             audio.play();
+
+            changeImage();
         });
-		
     </script>
 
 </body>
